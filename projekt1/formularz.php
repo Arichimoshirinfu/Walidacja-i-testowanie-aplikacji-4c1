@@ -12,7 +12,7 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST')
         if(empty($_POST["rszkol"]) || strpos($_POST['rszkol'], '/') == FALSE){
             $error = TRUE;
-            $error_rszkol = "error"
+            $error_rszkol = "error";
         }
         if(empty($_POST['imie'])){
             $error = TRUE;
@@ -25,32 +25,32 @@
 <label for="rszkol">Rok szkolny:</label>    
 <input type="text" name="rszkol" id="rszkol"><br>
 
-
+<hr>
 
 <label for="imie">Imię:</label>
 <input type="text" name="imie" id="imie"><br>
 
-
+<hr>
 
 <label for="nazwisko">Nazwisko:</label>
 <input type="text" name="nazwisko" id="nazwisko"><br>
 
-
+<hr>
 
 <label for="dataur">Data urodzenia:</label>
 <input type="date" name="dataur" id="dataur"><br>
 
-
+<hr>
 
 <label for="pesel">PESEL:</label>
 <input type="text" name="pesel" id="pesel"><br>
 
-
+<hr>
 
 <label for="email">Adres email:</label>
 <input type="text" name="email" id="email"><br>
 
-
+<hr>
 
 Trudności w uczeniu:<br>
 <input type="checkbox" name="trudnosciwucz" id="trudnosciwucz" value="dysleksja">
@@ -65,7 +65,7 @@ Trudności w uczeniu:<br>
 <input type="checkbox" name="trudnosciwucz" id="dyskalkulia">
 <label for="dyskalkulia" value="dyskalkulia">Dyskalkulia</label><br>
 
-
+<hr>
 
 Klasa:<br>
 <input type="radio" name="klasa" id="a" value="a">
@@ -89,9 +89,9 @@ Klasa:<br>
 <input type="radio" name="klasa" id="r" value="r">
 <label for="r">R</label><br>
 
+<hr>
 
-
-Wybór przedmiotów maturalnych:<br>
+Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
 
 <input type="checkbox" name="wybor-matura" id="biologia" value="biologia">
 <label for="biologia">Biologia</label><br>
@@ -141,20 +141,21 @@ Wybór przedmiotów maturalnych:<br>
 <input type="checkbox" name="wybor-matura" id="wiedza-o-społeczeństwie-(WOS)" value="wiedza-o-społeczeństwie-(WOS)">
 <label for="wiedza-o-społeczeństwie-(WOS)">Wiedza o społeczeństwie (WOS)</label><br>
 
-
+<hr>
 
 <label for="uwagi">Uwagi:</label><br>
 <textarea name="uwagi" id="uwagi" cols="15" rows="5"></textarea><br>
 
-
+<hr>
 
 <input type="checkbox" name="zgoda" id="zgoda"><label for="zgoda">Wyrażam zgodę na przetwarzanie moich danych osobowych</label><br>
 
-
+<hr>
 
 <button type="reset">Wyczyść dane</button><br>
 
 <button type="submit">Wyślij</button>
+
 
 
 </form>

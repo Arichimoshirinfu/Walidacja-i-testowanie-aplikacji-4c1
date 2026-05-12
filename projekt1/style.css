@@ -1,0 +1,16 @@
+*{
+    background-color: rgb(241, 241, 241);
+}
+form{
+    margin:auto;
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 3px 3px 5px rgba(44, 44, 44, 0.466);
+    width: 35%;
+}
+hr{
+    margin: 20px;
+}
+input:checked{
+    background-color: blueviolet;
+}

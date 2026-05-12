@@ -1,16 +1,30 @@
-*{
-    background-color: rgb(241, 241, 241);
+body{
+    background-color: #a6b1e1;
 }
-form{
+hr{
+    margin: 20px;
+    background-color: #424874;
+}
+.fcolor{
+    background-color: #f4eeff;
     margin:auto;
     margin-top: 20px;
     padding: 10px;
     box-shadow: 3px 3px 5px rgba(44, 44, 44, 0.466);
     width: 35%;
+    border: 1.5px solid #424874;
+    border-radius: 5px;
+    text-align: center;
 }
-hr{
-    margin: 20px;
+form{
+    margin-top: 10px;
 }
-input:checked{
-    background-color: blueviolet;
+button{
+    padding:10px;
+    margin:5px;
+    background-color: #293462;
+    color:white;
+}
+button:active{
+    background-color:#0c101d
 }

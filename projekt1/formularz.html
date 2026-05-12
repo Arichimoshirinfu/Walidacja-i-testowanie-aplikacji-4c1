@@ -7,22 +7,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <?php 
-    if($_SERVER['REQUEST_METHOD'] === 'POST')
-        if(empty($_POST["rszkol"]) || strpos($_POST['rszkol'], '/') == FALSE){
-            $error = TRUE;
-            $error_rszkol = "error";
-        }
-        if(empty($_POST['imie'])){
-            $error = TRUE;
-            $error_imie = 'error';
-        }
-    ?>
-
+<div class="fcolor">
 <form method="post">
 
-<label for="rszkol">Rok szkolny:</label>    
+<label for="rszkol">Rok szkolny:</label>
 <input type="text" name="rszkol" id="rszkol"><br>
 
 <hr>
@@ -43,7 +31,7 @@
 <hr>
 
 <label for="pesel">PESEL:</label>
-<input type="text" name="pesel" id="pesel"><br>
+<input type="text" name="pesel" maxlength="11" id="pesel"><br>
 
 <hr>
 
@@ -144,7 +132,7 @@ Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
 <hr>
 
 <label for="uwagi">Uwagi:</label><br>
-<textarea name="uwagi" id="uwagi" cols="15" rows="5"></textarea><br>
+<textarea name="uwagi" id="uwagi" cols="35" rows="4"></textarea><br>
 
 <hr>
 
@@ -159,7 +147,6 @@ Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
 
 
 </form>
-<pre><?php print_r($_POST) ?></pre>
-
+</div>
 </body>
 </html>

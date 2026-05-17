@@ -7,35 +7,68 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<?php 
+
+if($_SERVER["REQUEST_METHOD"] === "POST")
+    if(empty($_POST['rszkol'])){
+        $roksz_error = 'Podaj rok szkolny';
+    }
+    if(empty($_POST['imie'])){
+        $imie_error = 'Podaj imię';
+    }
+    if(empty($_POST['nazwisko'])){
+        $nazwisko_error = 'Podaj nazwisko';
+    }
+    if(empty($_POST['dataur'])){
+        $data_error = 'Podaj datę';
+    }
+    if(empty($_POST['pesel'])){
+        $pesel_error = 'Podaj PESEL';
+    }
+    if(empty($_POST['email'])){
+        $email_error = 'Podaj email';
+    }
+    if(empty($_POST['klasa'])){
+        $klasa_error = 'Wybierz klasę';
+    }
+    if(isset($_POST['zgoda']) && empty($_POST['zgoda'])){
+        $zgoda_error = 'Zaznacz zgodę';
+    }
+
+
+?>
+
+
 <div class="fcolor">
 <form method="post">
 
-<label for="rszkol">Rok szkolny:</label>
+<label for="rszkol"><span class="red"><sup>(wymagane)</sup></span>Rok szkolny:</label>
 <input type="text" name="rszkol" id="rszkol"><br>
 
 <hr>
 
-<label for="imie">Imię:</label>
+<label for="imie"><span class="red"><sup>(wymagane)</sup></span>Imię:</label>
 <input type="text" name="imie" id="imie"><br>
 
 <hr>
 
-<label for="nazwisko">Nazwisko:</label>
+<label for="nazwisko"><span class="red"><sup>(wymagane)</sup></span>Nazwisko:</label>
 <input type="text" name="nazwisko" id="nazwisko"><br>
 
 <hr>
 
-<label for="dataur">Data urodzenia:</label>
+<label for="dataur"><span class="red"><sup>(wymagane)</sup></span>Data urodzenia:</label>
 <input type="date" name="dataur" id="dataur"><br>
 
 <hr>
 
-<label for="pesel">PESEL:</label>
+<label for="pesel"><span class="red"><sup>(wymagane)</sup></span>PESEL:</label>
 <input type="text" name="pesel" maxlength="11" id="pesel"><br>
 
 <hr>
 
-<label for="email">Adres email:</label>
+<label for="email"><span class="red"><sup>(wymagane)</sup></span>Adres email:</label>
 <input type="text" name="email" id="email"><br>
 
 <hr>
@@ -55,7 +88,7 @@ Trudności w uczeniu:<br>
 
 <hr>
 
-Klasa:<br>
+<span class="red"><sup>(wymagane)</sup></span>Klasa:<br>
 <input type="radio" name="klasa" id="a" value="a">
 <label for="a">A</label><br>
 
@@ -79,7 +112,7 @@ Klasa:<br>
 
 <hr>
 
-Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
+<span class="red"><sup>(wymagane)</sup></span>Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
 
 <input type="checkbox" name="wybor-matura" id="biologia" value="biologia">
 <label for="biologia">Biologia</label><br>
@@ -136,7 +169,7 @@ Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
 
 <hr>
 
-<input type="checkbox" name="zgoda" id="zgoda"><label for="zgoda">Wyrażam zgodę na przetwarzanie moich danych osobowych</label><br>
+<input type="checkbox" name="zgoda" id="zgoda"><label for="zgoda"><span class="red"><sup>(wymagane)</sup></span>Wyrażam zgodę na przetwarzanie moich danych osobowych</label><br>
 
 <hr>
 
@@ -144,7 +177,7 @@ Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
 
 <button type="submit">Wyślij</button>
 
-
+<pre><?php print_r($_POST) ?></pre>
 
 </form>
 </div>

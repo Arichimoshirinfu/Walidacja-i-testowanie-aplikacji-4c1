@@ -28,3 +28,6 @@ button{
 button:active{
     background-color:#0c101d
 }
+.red{
+    color:red;
+}

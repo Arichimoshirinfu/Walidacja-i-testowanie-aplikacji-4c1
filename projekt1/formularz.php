@@ -4,91 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz rejestracyjny</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <?php 
+#  Weryfikacja błędów
+    $roksz_error = false;
+    $imie_error = false;
+    $nazwisko_error = false;
+    $data_error = false;
+    $pesel_error = false;
+    $email_error = false;
+    $klasa_error = false;
+    $zgoda_error = false;
+    $wybor_error = false;
 
-if($_SERVER["REQUEST_METHOD"] === "POST")
+    $roksz_error2 = false;
+    $imie_error2 = false;
+    $nazwisko_error2 = false;
+    $data_error2 = false;
+    $pesel_error2 = false;
+    $email_error2 = false;
+    $klasa_error2 = false;
+    $zgoda_error2 = false;
+    $wybor_error2 = false;
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
     if(empty($_POST['rszkol'])){
-        $roksz_error = 'Podaj rok szkolny';
+        $roksz_error = '<span class="red">Podaj rok szkolny</span>';
+        $roksz_error2 = true;
     }
     if(empty($_POST['imie'])){
-        $imie_error = 'Podaj imię';
+        $imie_error = '<span class="red">Podaj imię</span>';
+        $imie_error2 = true;
     }
     if(empty($_POST['nazwisko'])){
-        $nazwisko_error = 'Podaj nazwisko';
+        $nazwisko_error = '<span class="red">Podaj nazwisko</span>';
+        $nazwisko_error2 = true;
     }
     if(empty($_POST['dataur'])){
-        $data_error = 'Podaj datę';
+        $data_error = '<span class="red">Podaj datę</span>';
+        $data_error2 = true;
     }
-    if(empty($_POST['pesel'])){
-        $pesel_error = 'Podaj PESEL';
+    if(empty($_POST['pesel']) || strlen($_POST['pesel']) != 11){
+        $pesel_error = '<span class="red">Podaj PESEL</span>';
+        $pesel_error2 = true;
     }
     if(empty($_POST['email'])){
-        $email_error = 'Podaj email';
+        $email_error = '<span class="red">Podaj email</span>';
+        $email_error2 = true;
     }
     if(empty($_POST['klasa'])){
-        $klasa_error = 'Wybierz klasę';
+        $klasa_error = '<span class="red">Wybierz klasę</span>';
+        $klasa_error2 = true;
     }
-    if(isset($_POST['zgoda']) && empty($_POST['zgoda'])){
-        $zgoda_error = 'Zaznacz zgodę';
+    if(isset($_POST['zgoda']) && empty($_POST['zgoda'])){}
+    else{
+        $zgoda_error = '<span class="red">Zaznacz zgodę';
+        $zgoda_error2 = true;
     }
-
+    if((isset($_POST['wybor-matura[]']) && count($_POST["wybor-matura[]"]) > 5 )|| !isset($_POST['wybor-matura[]'])){
+        $wybor_error = '<span class="red">Wybierz przedioty maturalne</span>';
+        $wybor_error2 = true;
+    }
+}
 
 ?>
-
 
 <div class="fcolor">
 <form method="post">
 
-<label for="rszkol"><span class="red"><sup>(wymagane)</sup></span>Rok szkolny:</label>
-<input type="text" name="rszkol" id="rszkol"><br>
+<label for="rszkol"><span class="red"><sup>*</sup></span>Rok szkolny:</label>
+<input class="<?= $roksz_error2 == true ? "red2" : '' ?>" type="text" name="rszkol" id="rszkol"><br>
+<?= $roksz_error ?>
 
 <hr>
 
-<label for="imie"><span class="red"><sup>(wymagane)</sup></span>Imię:</label>
-<input type="text" name="imie" id="imie"><br>
+<label for="imie"><span class="red"><sup>*</sup></span>Imię:</label>
+<input class="<?= $imie_error2 == true ? "red2" : '' ?>" type="text" name="imie" id="imie"><br>
+<?= $imie_error ?>
 
 <hr>
 
-<label for="nazwisko"><span class="red"><sup>(wymagane)</sup></span>Nazwisko:</label>
-<input type="text" name="nazwisko" id="nazwisko"><br>
+<label for="nazwisko"><span class="red"><sup>*</sup></span>Nazwisko:</label>
+<input class="<?= $nazwisko_error2 == true ? "red2" : '' ?>" type="text" name="nazwisko" id="nazwisko"><br>
+<?= $nazwisko_error ?>
 
 <hr>
 
-<label for="dataur"><span class="red"><sup>(wymagane)</sup></span>Data urodzenia:</label>
-<input type="date" name="dataur" id="dataur"><br>
+<label for="dataur"><span class="red"><sup>*</sup></span>Data urodzenia:</label>
+<input class="<?= $data_error2 == true ? "red2" : '' ?>" type="date" name="dataur" id="dataur"><br>
+<?= $data_error ?>
 
 <hr>
 
-<label for="pesel"><span class="red"><sup>(wymagane)</sup></span>PESEL:</label>
-<input type="text" name="pesel" maxlength="11" id="pesel"><br>
+<label for="pesel"><span class="red"><sup>*</sup></span>PESEL:</label>
+<input class="<?= $pesel_error2 == true ? "red2" : '' ?>" type="text" name="pesel" maxlength="11" id="pesel"><br>
+<?= $pesel_error ?>
 
 <hr>
 
-<label for="email"><span class="red"><sup>(wymagane)</sup></span>Adres email:</label>
-<input type="text" name="email" id="email"><br>
+<label for="email"><span class="red"><sup>*</sup></span>Adres email:</label>
+<input class="<?= $email_error2 == true ? "red2" : '' ?>" type="text" name="email" id="email"><br>
+<?= $email_error ?>
 
 <hr>
 
 Trudności w uczeniu:<br>
-<input type="checkbox" name="trudnosciwucz" id="trudnosciwucz" value="dysleksja">
-<label for="dysleksja">Dysleksja</label><br>
+<table>
 
-<input type="checkbox" name="trudnosciwucz" id="dysgrafia" value="dysgrafia">
-<label for="dysgrafia">Dysgrafia</label><br>
+<tr>
+<td><input type="checkbox" name="trudnosciwucz" id="trudnosciwucz" value="dysleksja"></td>
+<td><label for="dysleksja">Dysleksja</label></td>
+</tr>
 
-<input type="checkbox" name="trudnosciwucz" id="dysortografia" value="dysortografia">
-<label for="dysortografia">Dysortografia</label><br>
+<tr>
+<td><input type="checkbox" name="trudnosciwucz" id="dysgrafia" value="dysgrafia"></td>
+<td><label for="dysgrafia">Dysgrafia</label></td>
+</tr>
 
-<input type="checkbox" name="trudnosciwucz" id="dyskalkulia">
-<label for="dyskalkulia" value="dyskalkulia">Dyskalkulia</label><br>
+<tr>
+<td><input type="checkbox" name="trudnosciwucz" id="dysortografia" value="dysortografia"></td>
+<td><label for="dysortografia">Dysortografia</label></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" name="trudnosciwucz" id="dyskalkulia"></td>
+<td><label for="dyskalkulia" value="dyskalkulia">Dyskalkulia</label></td>
+</tr>
+
+</table>
+
 
 <hr>
 
-<span class="red"><sup>(wymagane)</sup></span>Klasa:<br>
+<span class="red"><sup>*</sup></span>Klasa:<br>
+<div class="<?= $klasa_error2 == true ? "red2" : '' ?>">
 <input type="radio" name="klasa" id="a" value="a">
 <label for="a">A</label><br>
 
@@ -109,58 +164,99 @@ Trudności w uczeniu:<br>
 
 <input type="radio" name="klasa" id="r" value="r">
 <label for="r">R</label><br>
+</div><br>
+<?= $klasa_error ?>
 
 <hr>
 
-<span class="red"><sup>(wymagane)</sup></span>Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
+<span class="red"><sup>*</sup></span>Wybór przedmiotów maturalnych: (max 5 przedmiotów) <br>
+<div class="<?= $wybor_error2 == true ? "red2" : '' ?>">
+<table>
 
-<input type="checkbox" name="wybor-matura" id="biologia" value="biologia">
-<label for="biologia">Biologia</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="biologia" value="biologia"></td>
+<td><label for="biologia">Biologia</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="chemia" value="chemia">
-<label for="chemia">Chemia</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="chemia" value="chemia"></td>
+<td><label for="chemia">Chemia</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="filozofia" value="filozofia">
-<label for="filozofia">Filozofia</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="filozofia" value="filozofia"></td>
+<td><label for="filozofia">Filozofia</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="fizyka" value="fizyka">
-<label for="fizyka">Fizyka</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="fizyka" value="fizyka"></td>
+<td><label for="fizyka">Fizyka</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="geografia" value="geografia">
-<label for="geografia">Geografia</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="geografia" value="geografia"></td>
+<td><label for="geografia">Geografia</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="historia" value="historia">
-<label for="historia">Historia</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="historia" value="historia"></td>
+<td><label for="historia">Historia</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="historia-muzyki" value="historia-muzyki">
-<label for="historia-muzyki">Historia muzyki</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="historia-muzyki" value="historia-muzyki"></td>
+<td><label for="historia-muzyki">Historia muzyki</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="historia-sztuki" value="historia-sztuki">
-<label for="historia-sztuki">Historia sztuki</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="historia-sztuki" value="historia-sztuki"></td>
+<td><label for="historia-sztuki">Historia sztuki</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="informatyka" value="informatyka">
-<label for="informatyka">Informatyka</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="informatyka" value="informatyka"></td>
+<td><label for="informatyka">Informatyka</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="język-łaciński-i-kultura-antyczna" value="język-łaciński-i-kultura-antyczna">
-<label for="język-łaciński-i-kultura-antyczna">Język łaciński i kultura antyczna</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="język-łaciński-i-kultura-antyczna" value="język-łaciński-i-kultura-antyczna"></td>
+<td><label for="język-łaciński-i-kultura-antyczna">Język łaciński i kultura antyczna</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="język-mniejszości-etnicznej" value="język-mniejszości-etnicznej">
-<label for="język-mniejszości-etnicznej">Język mniejszości etnicznej</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="język-mniejszości-etnicznej" value="język-mniejszości-etnicznej"></td>
+<td><label for="język-mniejszości-etnicznej">Język mniejszości etnicznej</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="język mniejszości narodowej" value="język mniejszości narodowej">
-<label for="język mniejszości narodowej">Język mniejszości narodowej</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="język mniejszości narodowej" value="język mniejszości narodowej"></td>
+<td><label for="język mniejszości narodowej">Język mniejszości narodowej</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="język-polski" value="język-polski">
-<label for="język-polski">Język polski</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="język-polski" value="język-polski"></td>
+<td><label for="język-polski">Język polski</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="język-regionalny" value="język-regionalny">
-<label for="język-regionalny">Język regionalny</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="język-regionalny" value="język-regionalny"></td>
+<td><label for="język-regionalny">Język regionalny</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="matematyka" value="matematyka">
-<label for="matematyka">Matematyka</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="matematyka" value="matematyka"></td>
+<td><label for="matematyka">Matematyka</label></td>
+</tr>
 
-<input type="checkbox" name="wybor-matura" id="wiedza-o-społeczeństwie-(WOS)" value="wiedza-o-społeczeństwie-(WOS)">
-<label for="wiedza-o-społeczeństwie-(WOS)">Wiedza o społeczeństwie (WOS)</label><br>
+<tr>
+<td><input type="checkbox" name="wybor-matura[]" id="wiedza-o-społeczeństwie-(WOS)" value="wiedza-o-społeczeństwie-(WOS)"></td>
+<td><label for="wiedza-o-społeczeństwie-(WOS)">Wiedza o społeczeństwie (WOS)</label></td>
+</tr>
+
+
+</table>
+</div><br>
+<?= $wybor_error ?>
 
 <hr>
 
@@ -169,7 +265,10 @@ Trudności w uczeniu:<br>
 
 <hr>
 
-<input type="checkbox" name="zgoda" id="zgoda"><label for="zgoda"><span class="red"><sup>(wymagane)</sup></span>Wyrażam zgodę na przetwarzanie moich danych osobowych</label><br>
+<div class="<?= $zgoda_error2 == true ? "red2" : '' ?>">
+<label for="zgoda"><span class="red"><sup>*</sup></span>Wyrażam zgodę na przetwarzanie moich danych osobowych </label><input type="checkbox" name="zgoda" id="zgoda"><br>
+</div><br>
+<?= $zgoda_error ?>
 
 <hr>
 
@@ -177,9 +276,10 @@ Trudności w uczeniu:<br>
 
 <button type="submit">Wyślij</button>
 
-<pre><?php print_r($_POST) ?></pre>
+
 
 </form>
 </div>
+
 </body>
 </html>
